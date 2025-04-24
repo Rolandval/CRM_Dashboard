@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>CRM Dashboard</h1>
+        <div class="summary">
+            <div class="summary-box red">
+                <div class="summary-title">Пропущені дзвінки</div>
+                <div class="summary-value">{{ missed_calls }}</div>
+            </div>
+            <div class="summary-box yellow">
+                <div class="summary-title">Втрачені дзвінки</div>
+                <div class="summary-value">{{ lost_calls }}</div>
+            </div>
+        </div>
+        <div class="table-block">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Канал</th>
+                        <th>Непрочитаних повідомлень (останні 2 тижні)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for chat in crm %}
+                        {% for name, unread in chat.items %}
+                            <tr>
+                                <td>{{ name }}</td>
+                                <td class="unread">{{ unread }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="2" class="empty">Немає даних</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="updated-at">
+            Оновлено: {{ updated_at|date:"d.m.Y H:i" }}
+        </div>
+    </div>
+</body>
+</html>

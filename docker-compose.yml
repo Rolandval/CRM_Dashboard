@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    command: celery -A dashboard worker --pool=solo -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+
+  celery-beat:
+    build: .
+    command: celery -A dashboard beat -l info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+  
+  telegram_bot:
+    build: .
+    command: python telegram_bot.py
+    volumes:
+      - .:/code
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
