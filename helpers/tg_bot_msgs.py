@@ -5,7 +5,8 @@ from datetime import timezone, timedelta
 from dateutil import parser
 
 def get_report_text() -> str:
-    url = "http://172.24.48.1:8000/api/get-unread-report/"
+    API_BASE_URL = os.getenv("API_BASE_URL", "")
+    url = f"{API_BASE_URL}/api/get-unread-report/"
     data = requests.get(url).json()
      # Обробка дати
     updated_at_raw = data.get('updated_at', '')
