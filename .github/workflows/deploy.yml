@@ -19,9 +19,12 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
 
-      - name: Add server to known_hosts
+      - name: Add server to known_hosts (with logging)
         run: |
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+          echo "Пробую підключитися до ${{ secrets.HOST }} на порт 22..."
+          ssh-keyscan -v -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts 2>&1 | tee ssh-keyscan.log || true
+          echo "=== Вміст ssh-keyscan.log ==="
+          cat ssh-keyscan.log
 
       - name: Deploy and restart services (Windows)
         env:
