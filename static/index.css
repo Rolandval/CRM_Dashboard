@@ -63,11 +63,17 @@ h1 {
     font-weight: 700;
     margin-top: 2px;
 }
-.summary-box.red .summary-value {
-    color: #e53935;
-}
 .summary-box.yellow .summary-value {
-    color: #fbc02d;
+    color: #e5cb35;
+}
+.summary-box.red .summary-value {
+    color: #fb2d2d;
+}
+.unique-count {
+    font-size: 0.4em;
+    font-weight: 400;
+    vertical-align: middle;
+    opacity: 0.8;
 }
 .table-block {
     width: 100%;

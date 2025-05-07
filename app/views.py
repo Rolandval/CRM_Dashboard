@@ -14,6 +14,8 @@ def home(request):
         unitalk = get_unitalk_data(API_TOKEN)
         missed_calls = unitalk['missed_calls']
         lost_calls = unitalk['lost_calls']
+        unique_missed_phones = unitalk['unique_missed_phones']
+        unique_lost_phones = unitalk['unique_lost_phones']
         crm_qs = CRMModel.objects.filter(unread_chats__gt=0)
         crm_data = [{obj.channel_name: obj.unread_chats} for obj in crm_qs]
         updated_at = CRMModel.objects.values_list('updated_at', flat=True).last()
@@ -21,6 +23,8 @@ def home(request):
         result = {
             "missed_calls": missed_calls,
             "lost_calls": lost_calls,
+            "unique_missed_phones": unique_missed_phones,
+            "unique_lost_phones": unique_lost_phones,
             "crm": crm_data,
             "updated_at": updated_at
         }

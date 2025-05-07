@@ -12,13 +12,13 @@
     <div class="container">
         <h1>CRM Dashboard</h1>
         <div class="summary">
-            <div class="summary-box red">
-                <div class="summary-title">Пропущені дзвінки</div>
-                <div class="summary-value">{{ missed_calls }}</div>
-            </div>
             <div class="summary-box yellow">
+                <div class="summary-title">Пропущені дзвінки</div>
+                <div class="summary-value">{{ missed_calls }} <span class="unique-count">({{ unique_missed_phones }})</span></div>
+            </div>
+            <div class="summary-box red">
                 <div class="summary-title">Втрачені дзвінки</div>
-                <div class="summary-value">{{ lost_calls }}</div>
+                <div class="summary-value">{{ lost_calls }} <span class="unique-count">({{ unique_lost_phones }})</span></div>
             </div>
         </div>
         <div class="table-block">

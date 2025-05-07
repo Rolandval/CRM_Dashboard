@@ -41,7 +41,26 @@ def get_unitalk_data(api_key: str) -> dict:
     lost_resp = requests.post(url, headers=headers, json=lost_payload)
     lost_calls = lost_resp.json()
 
+    missed_phones = set()
+    lost_phones = set()
+
+    missed_data = missed_calls['calls']
+    for data in missed_data:
+        phone_number = data['from']
+        missed_phones.add(phone_number)
+
+
+    lost_data = lost_calls['calls']
+    for data in lost_data:
+        phone_number = data['from']
+        lost_phones.add(phone_number)
+
+    unique_missed_phones_count = len(missed_phones)
+    unique_lost_phones_count = len(lost_phones)
+
     return {
         'missed_calls': missed_calls['count'],
-        'lost_calls': lost_calls['count']
+        'lost_calls': lost_calls['count'],
+        'unique_missed_phones': unique_missed_phones_count,
+        'unique_lost_phones': unique_lost_phones_count
     }

@@ -29,9 +29,10 @@ def login_to_keycrm():
     # Випадковий user-agent
     user_agent = random.choice(USER_AGENTS)
     options.add_argument(f'--user-agent={user_agent}')
-    # options.add_argument('--headless')  
+    options.add_argument('--headless')  
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--window-size=1920,1080')
     # Блокуємо push-нотифікації браузера
     prefs = {
         "profile.default_content_setting_values.notifications": 2
@@ -103,8 +104,9 @@ def login_to_keycrm():
 
     today = datetime.now().strftime("%d.%m.%Y")
     two_weeks_ago = (datetime.now() - timedelta(days=14)).strftime("%d.%m.%Y")
+    time.sleep(0.5)
 
-    start_date_input = driver.find_element(By.XPATH, "//input[@placeholder='Дата початку']")
+    start_date_input = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Дата початку']")))
     start_date_input.click()
     start_date_input.send_keys(two_weeks_ago)
 
