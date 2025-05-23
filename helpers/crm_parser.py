@@ -29,7 +29,7 @@ def login_to_keycrm():
     # Випадковий user-agent
     user_agent = random.choice(USER_AGENTS)
     options.add_argument(f'--user-agent={user_agent}')
-    options.add_argument('--headless')  
+    options.add_argument('--headless=new')  
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1920,1080')

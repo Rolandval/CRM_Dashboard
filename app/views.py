@@ -2,6 +2,7 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse
 from helpers.unitalk_requests import get_unitalk_data
+from helpers.akc import get_new_call_requests, get_pending_orders_count, get_unanswered_messages_count
 from dashboard.settings import API_TOKEN
 from .models import CRMModel
 import subprocess
@@ -19,6 +20,15 @@ def home(request):
         crm_qs = CRMModel.objects.filter(unread_chats__gt=0)
         crm_data = [{obj.channel_name: obj.unread_chats} for obj in crm_qs]
         updated_at = CRMModel.objects.values_list('updated_at', flat=True).last()
+        request_recall_akc = get_new_call_requests()
+        pending_orders = get_pending_orders_count()
+        unanswered_messages = get_unanswered_messages_count()
+        if request_recall_akc:
+            crm_data.append({"Заявки на дзвінок(сайт)": request_recall_akc})
+        if pending_orders:
+            crm_data.append({"Замовлення на сайті": pending_orders})
+        if unanswered_messages:
+            crm_data.append({"Повідомлення без відповіді(сайт)": unanswered_messages})
             
         result = {
             "missed_calls": missed_calls,
@@ -38,12 +48,13 @@ def get_unread_report(request):
         crm_qs = CRMModel.objects.filter(unread_chats__gt=0)
         crm_data = [{obj.channel_name: obj.unread_chats} for obj in crm_qs]
         updated_at = CRMModel.objects.values_list('updated_at', flat=True).last()
+        
             
         result = {
             "missed_calls": missed_calls,
             "lost_calls": lost_calls,
             "crm": crm_data,
-            "updated_at": updated_at
+            "updated_at": updated_at,
         }
         return JsonResponse(result)
 
