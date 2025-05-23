@@ -24,11 +24,11 @@ def home(request):
         pending_orders = get_pending_orders_count()
         unanswered_messages = get_unanswered_messages_count()
         if request_recall_akc:
-            crm_data.append({"Заявки на дзвінок(сайт)": request_recall_akc})
+            crm_data.append({"Заявки на дзвінок(akumulyator.center)": request_recall_akc})
         if pending_orders:
-            crm_data.append({"Замовлення на сайті": pending_orders})
+            crm_data.append({"Замовлення на сайті(akumulyator.center)": pending_orders})
         if unanswered_messages:
-            crm_data.append({"Повідомлення без відповіді(сайт)": unanswered_messages})
+            crm_data.append({"Повідомлення без відповіді(akumulyator.center)": unanswered_messages})
             
         result = {
             "missed_calls": missed_calls,
