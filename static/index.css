@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background: linear-gradient(120deg, #f6fafd 0%, #e3eaf6 100%);
+    background: linear-gradient(120deg, #2e2c2c 0%, #2e2c2c 100%);
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -9,9 +9,9 @@ body {
 .container {
     max-width: 700px;
     margin: 40px auto 0 auto;
-    background: #fff;
+    background: #000000;
     border-radius: 22px;
-    box-shadow: 0 8px 32px rgba(60, 72, 88, 0.15);
+    box-shadow: 0 8px 32px rgba(250, 252, 253, 0.15);
     padding: 36px 36px 60px 36px;
     position: relative;
     display: flex;
@@ -21,7 +21,7 @@ body {
 h1 {
     text-align: center;
     font-weight: 700;
-    color: #22304a;
+    color: #ffffff;
     margin-bottom: 38px;
     letter-spacing: 1px;
     font-size: 2.1em;
@@ -43,18 +43,18 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #f7fafd;
+    background: #000000;
     transition: box-shadow 0.2s;
 }
 .summary-box.red {
-    border: 2px solid #e53935;
+    border: 2px solid #ff0400;
 }
 .summary-box.yellow {
     border: 2px solid #fbc02d;
 }
 .summary-title {
     font-size: 1.09em;
-    color: #22304a;
+    color: #ffffff;
     margin-bottom: 8px;
     font-weight: 600;
 }
@@ -64,10 +64,10 @@ h1 {
     margin-top: 2px;
 }
 .summary-box.yellow .summary-value {
-    color: #e5cb35;
+    color: #ffd900;
 }
 .summary-box.red .summary-value {
-    color: #fb2d2d;
+    color: #ff0000;
 }
 .unique-count {
     font-size: 0.4em;
@@ -82,18 +82,18 @@ h1 {
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #f9fbfe;
+    background: #000000;
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 1px 7px rgba(60, 72, 88, 0.07);
+    box-shadow: 0 1px 7px rgba(223, 229, 236, 0.767);
 }
 th, td {
     padding: 14px 10px;
     text-align: center;
 }
 th {
-    background: #f1f5fa;
-    color: #2b354a;
+    background: #000000;
+    color: #ffffff;
     font-size: 1.08em;
     letter-spacing: 1px;
     font-weight: 600;
@@ -105,7 +105,7 @@ tr:last-child {
     border-bottom: none;
 }
 td {
-    color: #374151;
+    color: #ffffff;
     font-size: 1.04em;
 }
 td.unread {
