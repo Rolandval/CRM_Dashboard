@@ -23,12 +23,15 @@ def home(request):
         request_recall_akc = get_new_call_requests()
         pending_orders = get_pending_orders_count()
         unanswered_messages = get_unanswered_messages_count()
+        telegram_messages = TelegramMSGS.objects.all().count()
         if request_recall_akc:
             crm_data.append({"Заявки на дзвінок(akumulyator.center)": request_recall_akc})
         if pending_orders:
             crm_data.append({"Замовлення на сайті(akumulyator.center)": pending_orders})
         if unanswered_messages:
             crm_data.append({"Повідомлення без відповіді(akumulyator.center)": unanswered_messages})
+        if telegram_messages > 0:
+            crm_data.append({"заявки з aku.lviv": telegram_messages})
             
         result = {
             "missed_calls": missed_calls,

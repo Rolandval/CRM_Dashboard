@@ -44,6 +44,18 @@ services:
       - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
       - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
       - API_BASE_URL=http://web:8001
+
+  telegram_bot_req:
+    build: .
+    command: python telegram_bot_req.py
+    volumes:
+      - .:/code
+    env_file:
+      - .env
+    environment:
+      - TELEGRAM_REQ_TOKEN=${TELEGRAM_REQ_TOKEN}
+      - TARGET_GROUP_ID=${TARGET_GROUP_ID}
+      - FINISHED_GROUP_ID=${FINISHED_GROUP_ID}
       
   web:
     build: .
